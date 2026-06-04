@@ -1,14 +1,22 @@
 package programacion3.entities;
-import programacion3.interfaces.Calculable;
 
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import programacion3.enums.Estado;
 import programacion3.enums.FormaPago;
+import programacion3.interfaces.Calculable;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
+
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode(of = "id", callSuper = false)
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
 
 public class Pedido extends Base implements Calculable {
 
@@ -17,65 +25,8 @@ public class Pedido extends Base implements Calculable {
     private Double total;
     private FormaPago formaPago;
 
-    private Set<DetallePedido> detalles;
-
-    public Pedido() {
-        this.detalles = new HashSet<>();
-    }
-
-    public Pedido(Long id, boolean eliminado, LocalDateTime createdAt,
-                  LocalDate fecha, Estado estado,
-                  Double total, FormaPago formaPago,
-                  Set<DetallePedido> detalles) {
-
-        super(id, eliminado, createdAt);
-
-        this.fecha = fecha;
-        this.estado = estado;
-        this.total = total;
-        this.formaPago = formaPago;
-        this.detalles = detalles;
-    }
-
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
-    }
-
-    public FormaPago getFormaPago() {
-        return formaPago;
-    }
-
-    public void setFormaPago(FormaPago formaPago) {
-        this.formaPago = formaPago;
-    }
-
-    public Set<DetallePedido> getDetalles() {
-        return detalles;
-    }
-
-    public void setDetalles(Set<DetallePedido> detalles) {
-        this.detalles = detalles;
-    }
+    @Builder.Default
+    private Set<DetallePedido> detalles = new HashSet<>();
 
     public void addDetallePedido(DetallePedido detallePedido) {
         detalles.add(detallePedido);
@@ -113,28 +64,5 @@ public class Pedido extends Base implements Calculable {
         for (DetallePedido detalle : detalles) {
             total += detalle.getSubtotal();
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Pedido{" +
-                "fecha=" + fecha +
-                ", estado=" + estado +
-                ", total=" + total +
-                ", formaPago=" + formaPago +
-                ", detalles=" + detalles +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Pedido pedido)) return false;
-        return Objects.equals(getId(), pedido.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
     }
 }
