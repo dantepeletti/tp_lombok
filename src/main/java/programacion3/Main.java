@@ -5,6 +5,7 @@ import programacion3.entities.DetallePedido;
 import programacion3.entities.Pedido;
 import programacion3.entities.Producto;
 import programacion3.entities.Usuario;
+import programacion3.dtos.UsuarioDTO;
 
 import programacion3.enums.Estado;
 import programacion3.enums.FormaPago;
@@ -313,6 +314,19 @@ public class Main {
                 .rol(Rol.USUARIO)
                 .pedidos(pedidosUsuario2)
                 .build();
+
+        UsuarioDTO usuarioDTO = new UsuarioDTO(
+                usuario1.getId(),
+                usuario1.getNombre(),
+                usuario1.getApellido(),
+                usuario1.getMail(),
+                usuario1.getCelular(),
+                usuario1.getPedidos()
+        );
+
+        System.out.println();
+        System.out.println("/// USUARIO DTO ///");
+        System.out.println(usuarioDTO);
 
         // PRINTS PEDIDOS
         System.out.println();
