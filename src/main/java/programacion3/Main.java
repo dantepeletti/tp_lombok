@@ -26,33 +26,32 @@ public class Main {
 
 
         // CATEGORIAS
-        Categoria categoria1 = new Categoria(
-                1L,
-                false,
-                LocalDateTime.now(),
-                "Electronica",
-                "Productos tecnologicos",
-                productosElectronica
-        );
+        Categoria categoria1 = Categoria.builder()
+                .id(1L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Electronica")
+                .descripcion("Productos tecnologicos")
+                .productos(productosElectronica)
+                .build();
 
-        Categoria categoria2 = new Categoria(
-                2L,
-                false,
-                LocalDateTime.now(),
-                "Hogar",
-                "Productos para el hogar",
-                productosHogar
-        );
+        Categoria categoria2 = Categoria.builder()
+                .id(2L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Hogar")
+                .descripcion("Productos para el hogar")
+                .productos(productosHogar)
+                .build();
 
-        Categoria categoria3 = new Categoria(
-                3L,
-                false,
-                LocalDateTime.now(),
-                "Deporte",
-                "Productos deportivos",
-                productosDeporte
-        );
-
+        Categoria categoria3 = Categoria.builder()
+                .id(3L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Deporte")
+                .descripcion("Productos deportivos")
+                .productos(productosDeporte)
+                .build();
 
         // PRODUCTOS
         Producto producto1 = Producto.builder()
@@ -68,122 +67,121 @@ public class Main {
                 .categoria(categoria1)
                 .build();
 
-        Producto producto2 = new Producto(
-                2L,
-                false,
-                LocalDateTime.now(),
-                "Mouse Logitech",
-                25000.0,
-                "Mouse inalambrico",
-                30,
-                "mouse.jpg",
-                true,
-                categoria1
-        );
+        Producto producto2 = Producto.builder()
+                .id(2L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Mouse Logitech")
+                .precio(25000.0)
+                .descripcion("Mouse inalambrico")
+                .stock(30)
+                .imagen("mouse.jpg")
+                .disponible(true)
+                .categoria(categoria1)
+                .build();
 
-        Producto producto3 = new Producto(
-                3L,
-                false,
-                LocalDateTime.now(),
-                "Heladera Samsung",
-                600000.0,
-                "Heladera no frost",
-                5,
-                "heladera.jpg",
-                true,
-                categoria2
-        );
+        Producto producto3 = Producto.builder()
+                .id(3L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Heladera Samsung")
+                .precio(600000.0)
+                .descripcion("Heladera no frost")
+                .stock(5)
+                .imagen("heladera.jpg")
+                .disponible(true)
+                .categoria(categoria2)
+                .build();
+        Producto producto4 = Producto.builder()
+                .id(4L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Silla Gamer")
+                .precio(50000.0)
+                .descripcion("Silla ergonomica")
+                .stock(15)
+                .imagen("silla.jpg")
+                .disponible(true)
+                .categoria(categoria2)
+                .build();
 
-        Producto producto4 = new Producto(
-                4L,
-                false,
-                LocalDateTime.now(),
-                "Silla Gamer",
-                50000.0,
-                "Silla ergonomica",
-                15,
-                "silla.jpg",
-                true,
-                categoria2
-        );
+        Producto producto5 = Producto.builder()
+                .id(5L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Pelota Futbol")
+                .precio(20000.0)
+                .descripcion("Pelota profesional")
+                .stock(20)
+                .imagen("pelota.jpg")
+                .disponible(true)
+                .categoria(categoria3)
+                .build();
 
-        Producto producto5 = new Producto(
-                5L,
-                false,
-                LocalDateTime.now(),
-                "Pelota Futbol",
-                20000.0,
-                "Pelota profesional",
-                20,
-                "pelota.jpg",
-                true,
-                categoria3
-        );
+        Producto producto6 = Producto.builder()
+                .id(6L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Teclado Mecanico")
+                .precio(45000.0)
+                .descripcion("Teclado RGB")
+                .stock(25)
+                .imagen("teclado.jpg")
+                .disponible(true)
+                .categoria(categoria1)
+                .build();
 
-        Producto producto6 = new Producto(
-                6L,
-                false,
-                LocalDateTime.now(),
-                "Teclado Mecanico",
-                45000.0,
-                "Teclado RGB",
-                25,
-                "teclado.jpg",
-                true,
-                categoria1
-        );
+        Producto producto7 = Producto.builder()
+                .id(7L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Monitor Samsung 24")
+                .precio(180000.0)
+                .descripcion("Monitor Full HD")
+                .stock(12)
+                .imagen("monitor.jpg")
+                .disponible(true)
+                .categoria(categoria1)
+                .build();
 
-        Producto producto7 = new Producto(
-                7L,
-                false,
-                LocalDateTime.now(),
-                "Monitor Samsung 24",
-                180000.0,
-                "Monitor Full HD",
-                12,
-                "monitor.jpg",
-                true,
-                categoria1
-        );
+        Producto producto8 = Producto.builder()
+                .id(8L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Microondas")
+                .precio(120000.0)
+                .descripcion("Microondas 20 litros")
+                .stock(8)
+                .imagen("microondas.jpg")
+                .disponible(true)
+                .categoria(categoria2)
+                .build();
 
-        Producto producto8 = new Producto(
-                8L,
-                false,
-                LocalDateTime.now(),
-                "Microondas",
-                120000.0,
-                "Microondas 20 litros",
-                8,
-                "microondas.jpg",
-                true,
-                categoria2
-        );
+        Producto producto9 = Producto.builder()
+                .id(9L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Licuadora")
+                .precio(35000.0)
+                .descripcion("Licuadora 1.5 litros")
+                .stock(18)
+                .imagen("licuadora.jpg")
+                .disponible(true)
+                .categoria(categoria2)
+                .build();
 
-        Producto producto9 = new Producto(
-                9L,
-                false,
-                LocalDateTime.now(),
-                "Licuadora",
-                35000.0,
-                "Licuadora 1.5 litros",
-                18,
-                "licuadora.jpg",
-                true,
-                categoria2
-        );
-
-        Producto producto10 = new Producto(
-                10L,
-                false,
-                LocalDateTime.now(),
-                "Mancuernas 10kg",
-                40000.0,
-                "Par de mancuernas",
-                10,
-                "mancuernas.jpg",
-                true,
-                categoria3
-        );
+        Producto producto10 = Producto.builder()
+                .id(10L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Mancuernas 10kg")
+                .precio(40000.0)
+                .descripcion("Par de mancuernas")
+                .stock(10)
+                .imagen("mancuernas.jpg")
+                .disponible(true)
+                .categoria(categoria3)
+                .build();
 
 
         // ADD A LOS SETS
@@ -290,32 +288,31 @@ public class Main {
 
 
         // USUARIOS
-        Usuario usuario1 = new Usuario(
-                1L,
-                false,
-                LocalDateTime.now(),
-                "Juan",
-                "Perez",
-                "juan@gmail.com",
-                "34561234",
-                "1234",
-                Rol.ADMIN,
-                pedidosUsuario1
-        );
+        Usuario usuario1 = Usuario.builder()
+                .id(1L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Juan")
+                .apellido("Perez")
+                .mail("juan@gmail.com")
+                .celular("34561234")
+                .password("1234")
+                .rol(Rol.ADMIN)
+                .pedidos(pedidosUsuario1)
+                .build();
 
-        Usuario usuario2 = new Usuario(
-                2L,
-                false,
-                LocalDateTime.now(),
-                "Maria",
-                "Lopez",
-                "maria@gmail.com",
-                "34567890",
-                "5678",
-                Rol.USUARIO,
-                pedidosUsuario2
-        );
-
+        Usuario usuario2 = Usuario.builder()
+                .id(2L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Maria")
+                .apellido("Lopez")
+                .mail("maria@gmail.com")
+                .celular("34567890")
+                .password("5678")
+                .rol(Rol.USUARIO)
+                .pedidos(pedidosUsuario2)
+                .build();
 
         // PRINTS PEDIDOS
         System.out.println();
@@ -346,18 +343,18 @@ public class Main {
 
 
         // PRUEBA EQUALS
-        Producto productoNuevo = new Producto(
-                10L,
-                false,
-                LocalDateTime.now(),
-                "Notebook Lenovo",
-                999999.0,
-                "Otro producto",
-                5,
-                "otra.jpg",
-                true,
-                categoria1
-        );
+        Producto productoNuevo = Producto.builder()
+                .id(10L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Notebook Lenovo")
+                .precio(999999.0)
+                .descripcion("Otro producto")
+                .stock(5)
+                .imagen("otra.jpg")
+                .disponible(true)
+                .categoria(categoria1)
+                .build();
 
         System.out.println();
 
