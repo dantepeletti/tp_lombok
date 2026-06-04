@@ -55,18 +55,18 @@ public class Main {
 
 
         // PRODUCTOS
-        Producto producto1 = new Producto(
-                1L,
-                false,
-                LocalDateTime.now(),
-                "Notebook Lenovo",
-                850000.0,
-                "Notebook gamer",
-                10,
-                "lenovo.jpg",
-                true,
-                categoria1
-        );
+        Producto producto1 = Producto.builder()
+                .id(1L)
+                .eliminado(false)
+                .createdAt(LocalDateTime.now())
+                .nombre("Notebook Lenovo")
+                .precio(850000.0)
+                .descripcion("Notebook gamer")
+                .stock(10)
+                .imagen("lenovo.jpg")
+                .disponible(true)
+                .categoria(categoria1)
+                .build();
 
         Producto producto2 = new Producto(
                 2L,

@@ -1,7 +1,17 @@
 package programacion3.entities;
 
-import java.time.LocalDateTime;
-import java.util.Objects;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+import java.lang.invoke.CallSite;
+
+@Getter
+@Setter
+@ToString(of = {"nombre","precio","stock"})
+@EqualsAndHashCode(of = "nombre", callSuper = false)
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
 
 public class Producto extends Base {
 
@@ -12,100 +22,4 @@ public class Producto extends Base {
     private String imagen;
     private Boolean disponible;
     private Categoria categoria;
-
-    public Producto() {
-    }
-
-    public Producto(Long id, boolean eliminado, LocalDateTime createdAt,
-                    String nombre, Double precio, String descripcion,
-                    int stock, String imagen, Boolean disponible,
-                    Categoria categoria) {
-
-        super(id, eliminado, createdAt);
-
-        this.nombre = nombre;
-        this.precio = precio;
-        this.descripcion = descripcion;
-        this.stock = stock;
-        this.imagen = imagen;
-        this.disponible = disponible;
-        this.categoria = categoria;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-
-    public Boolean getDisponible() {
-        return disponible;
-    }
-
-    public void setDisponible(Boolean disponible) {
-        this.disponible = disponible;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    @Override
-    public String toString() {
-        return "Producto{" +
-                "nombre='" + nombre + '\'' +
-                ", precio=" + precio +
-                ", stock=" + stock +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Producto producto)) return false;
-        return Objects.equals(nombre, producto.nombre);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nombre);
-    }
 }
