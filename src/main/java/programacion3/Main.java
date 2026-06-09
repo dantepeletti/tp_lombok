@@ -202,7 +202,7 @@ public class Main {
 
         productosDeporte.add(producto10);
 
-        System.out.println("\n ==== PRODUCTOS DISPONIBLES ===");
+        System.out.println("\n /// PRODUCTOS DISPONIBLES ///");
 
         productosElectronica.stream()
                 .filter(Producto::getDisponible)
@@ -267,6 +267,14 @@ public class Main {
 
         pedido1.addDetallePedido(detalle1);
         pedido1.addDetallePedido(detalle2);
+
+        int cantidadItems = pedido1.getDetalles()
+                .stream()
+                .mapToInt(DetallePedido::getCantidad)
+                .sum();
+
+        System.out.println("\n /// CANTIDAD DE ITEMS PEDIDOS ///");
+        System.out.println(cantidadItems);
 
 
         // PEDIDO 2
