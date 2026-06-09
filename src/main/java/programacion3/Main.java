@@ -202,6 +202,20 @@ public class Main {
 
         productosDeporte.add(producto10);
 
+        System.out.println("\n ==== PRODUCTOS DISPONIBLES ===");
+
+        productosElectronica.stream()
+                .filter(Producto::getDisponible)
+                .forEach(System.out::println);
+
+        productosHogar.stream()
+                .filter(Producto::getDisponible)
+                .forEach(System.out::println);
+
+        productosDeporte.stream()
+                .filter(Producto::getDisponible)
+                .forEach(System.out::println);
+
 
         // PRINTS PRODUCTOS
         System.out.println("/// PRODUCTO ///");
