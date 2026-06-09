@@ -24,7 +24,7 @@ public class Main {
         Set<Producto> productosElectronica = new HashSet<>();
         Set<Producto> productosHogar = new HashSet<>();
         Set<Producto> productosDeporte = new HashSet<>();
-
+        Set<Producto> todosLosProductos = new HashSet<>();
 
         // CATEGORIAS
         Categoria categoria1 = Categoria.builder()
@@ -126,7 +126,7 @@ public class Main {
                 .nombre("Teclado Mecanico")
                 .precio(45000.0)
                 .descripcion("Teclado RGB")
-                .stock(25)
+                .stock(2)
                 .imagen("teclado.jpg")
                 .disponible(true)
                 .categoria(categoria1)
@@ -202,6 +202,10 @@ public class Main {
 
         productosDeporte.add(producto10);
 
+        todosLosProductos.addAll(productosElectronica);
+        todosLosProductos.addAll(productosHogar);
+        todosLosProductos.addAll(productosDeporte);
+
         System.out.println("\n /// PRODUCTOS DISPONIBLES ///");
 
         productosElectronica.stream()
@@ -214,6 +218,12 @@ public class Main {
 
         productosDeporte.stream()
                 .filter(Producto::getDisponible)
+                .forEach(System.out::println);
+
+        System.out.println("\n /// PRODUCTOS CON STOCK MENOR A 5 ///");
+
+        todosLosProductos.stream()
+                .filter(producto -> producto.getStock() < 5)
                 .forEach(System.out::println);
 
 
