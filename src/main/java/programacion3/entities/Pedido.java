@@ -1,5 +1,6 @@
 package programacion3.entities;
 
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import programacion3.enums.Estado;
@@ -12,24 +13,46 @@ import java.util.Set;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"usuario", "detalles"})
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
 
+@Entity
+@Table(name = "pedidos")
+
 public class Pedido extends Base implements Calculable {
 
     private LocalDate fecha;
+
+    @Enumerated(EnumType.STRING)
     private Estado estado;
+
     private Double total;
+
+    @Enumerated(EnumType.STRING)
     private FormaPago formaPago;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    @OneToMany(mappedBy = "pedido",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     @Builder.Default
     private Set<DetallePedido> detalles = new HashSet<>();
 
     public void addDetallePedido(DetallePedido detallePedido) {
         detalles.add(detallePedido);
+        detallePedido.setPedido(this);
+        calcularTotal();
+    }
+
+    public void removeDetallePedido(DetallePedido detallePedido) {
+        detalles.remove(detallePedido);
+        detallePedido.setPedido(null);
         calcularTotal();
     }
 
@@ -50,10 +73,8 @@ public class Pedido extends Base implements Calculable {
         DetallePedido detalle = findDetallePedidoByProducto(producto);
 
         if (detalle != null) {
-            detalles.remove(detalle);
+            removeDetallePedido(detalle);
         }
-
-        calcularTotal();
     }
 
     @Override
@@ -63,4 +84,5 @@ public class Pedido extends Base implements Calculable {
                 .mapToDouble(DetallePedido::getSubtotal)
                 .sum();
     }
+
 }
