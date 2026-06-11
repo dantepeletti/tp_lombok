@@ -1,5 +1,9 @@
 package programacion3;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+
 import programacion3.entities.Categoria;
 import programacion3.entities.DetallePedido;
 import programacion3.entities.Pedido;
@@ -28,7 +32,6 @@ public class Main {
 
         // CATEGORIAS
         Categoria categoria1 = Categoria.builder()
-                .id(1L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Electronica")
@@ -37,7 +40,6 @@ public class Main {
                 .build();
 
         Categoria categoria2 = Categoria.builder()
-                .id(2L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Hogar")
@@ -46,7 +48,6 @@ public class Main {
                 .build();
 
         Categoria categoria3 = Categoria.builder()
-                .id(3L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Deporte")
@@ -56,7 +57,6 @@ public class Main {
 
         // PRODUCTOS
         Producto producto1 = Producto.builder()
-                .id(1L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Notebook Lenovo")
@@ -69,7 +69,6 @@ public class Main {
                 .build();
 
         Producto producto2 = Producto.builder()
-                .id(2L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Mouse Logitech")
@@ -82,7 +81,6 @@ public class Main {
                 .build();
 
         Producto producto3 = Producto.builder()
-                .id(3L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Heladera Samsung")
@@ -94,7 +92,6 @@ public class Main {
                 .categoria(categoria2)
                 .build();
         Producto producto4 = Producto.builder()
-                .id(4L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Silla Gamer")
@@ -107,7 +104,6 @@ public class Main {
                 .build();
 
         Producto producto5 = Producto.builder()
-                .id(5L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Pelota Futbol")
@@ -120,7 +116,6 @@ public class Main {
                 .build();
 
         Producto producto6 = Producto.builder()
-                .id(6L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Teclado Mecanico")
@@ -133,7 +128,6 @@ public class Main {
                 .build();
 
         Producto producto7 = Producto.builder()
-                .id(7L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Monitor Samsung 24")
@@ -146,7 +140,6 @@ public class Main {
                 .build();
 
         Producto producto8 = Producto.builder()
-                .id(8L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Microondas")
@@ -159,7 +152,6 @@ public class Main {
                 .build();
 
         Producto producto9 = Producto.builder()
-                .id(9L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Licuadora")
@@ -172,7 +164,6 @@ public class Main {
                 .build();
 
         Producto producto10 = Producto.builder()
-                .id(10L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Mancuernas 10kg")
@@ -248,29 +239,27 @@ public class Main {
 
 
         // DETALLES DE PEDIDO
-        DetallePedido detalle1 = new DetallePedido(
-                2,
-                producto1.getPrecio() * 2,
-                producto1
-        );
+        DetallePedido detalle1 = DetallePedido.builder()
+                .cantidad(2)
+               .subtotal(producto1.getPrecio() * 2)
+               .producto(producto1)
+                .build();
 
-        DetallePedido detalle2 = new DetallePedido(
-                1,
-                producto2.getPrecio(),
-                producto2
-        );
+        DetallePedido detalle2 = DetallePedido.builder()
+               .cantidad(1)
+               .subtotal(producto2.getPrecio())
+                .producto(producto2)
+                .build();
 
-        DetallePedido detalle3 = new DetallePedido(
-                1,
-                producto3.getPrecio(),
-                producto3
-        );
-
+        DetallePedido detalle3 = DetallePedido.builder()
+                .cantidad(1)
+                .subtotal(producto3.getPrecio())
+                .producto(producto3)
+                .build();
 
         // PEDIDO 1
         Pedido pedido1 = new Pedido();
 
-        pedido1.setId(1L);
         pedido1.setFecha(LocalDate.now());
         pedido1.setEstado(Estado.PENDIENTE);
         pedido1.setFormaPago(FormaPago.TARJETA);
@@ -290,7 +279,6 @@ public class Main {
         // PEDIDO 2
         Pedido pedido2 = new Pedido();
 
-        pedido2.setId(2L);
         pedido2.setFecha(LocalDate.now());
         pedido2.setEstado(Estado.CONFIRMADO);
         pedido2.setFormaPago(FormaPago.EFECTIVO);
@@ -301,7 +289,6 @@ public class Main {
         // PEDIDO 3
         Pedido pedido3 = new Pedido();
 
-        pedido3.setId(3L);
         pedido3.setFecha(LocalDate.now());
         pedido3.setEstado(Estado.TERMINADO);
         pedido3.setFormaPago(FormaPago.TRANSFERENCIA);
@@ -314,15 +301,9 @@ public class Main {
         Set<Pedido> pedidosUsuario1 = new HashSet<>();
         Set<Pedido> pedidosUsuario2 = new HashSet<>();
 
-        pedidosUsuario1.add(pedido1);
-        pedidosUsuario1.add(pedido2);
-
-        pedidosUsuario2.add(pedido3);
-
 
         // USUARIOS
         Usuario usuario1 = Usuario.builder()
-                .id(1L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Juan")
@@ -335,7 +316,6 @@ public class Main {
                 .build();
 
         Usuario usuario2 = Usuario.builder()
-                .id(2L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Maria")
@@ -390,7 +370,6 @@ public class Main {
 
         // PRUEBA EQUALS
         Producto productoNuevo = Producto.builder()
-                .id(10L)
                 .eliminado(false)
                 .createdAt(LocalDateTime.now())
                 .nombre("Notebook Lenovo")
@@ -415,6 +394,43 @@ public class Main {
                 System.out.println("No coincide con: " + producto.getNombre());
             }
         }
+        usuario1.addPedido(pedido1);
+        usuario1.addPedido(pedido2);
+
+        usuario2.addPedido(pedido3);
+
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("miUnidad");
+
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+
+        // Persistir categorías
+        em.persist(categoria1);
+        em.persist(categoria2);
+        em.persist(categoria3);
+
+        // Persistir productos
+        em.persist(producto1);
+        em.persist(producto2);
+        em.persist(producto3);
+        em.persist(producto4);
+        em.persist(producto5);
+        em.persist(producto6);
+        em.persist(producto7);
+        em.persist(producto8);
+        em.persist(producto9);
+        em.persist(producto10);
+
+        // Persistir usuarios
+        em.persist(usuario1);
+        em.persist(usuario2);
+
+        em.getTransaction().commit();
+
+        em.close();
+        emf.close();
 
     }
 }
