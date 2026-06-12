@@ -429,6 +429,45 @@ public class Main {
 
         em.getTransaction().commit();
 
+        em.getTransaction().begin();
+
+        producto1.setPrecio(900000.0);
+        producto1.setStock(8);
+
+        producto2.setPrecio(30000.0);
+        producto2.setStock(25);
+
+        em.merge(producto1);
+        em.merge(producto2);
+
+        em.getTransaction().begin();
+
+        Usuario usuarioBuscado = em.find(Usuario.class, 1L);
+
+        System.out.println("\n/// USUARIO BUSCADO POR ID ///");
+        System.out.println(usuarioBuscado);
+
+        Usuario usuarioMail = em.createQuery(
+                        "SELECT u FROM Usuario u WHERE u.mail = :mail",
+                        Usuario.class)
+                .setParameter("mail", "juan@gmail.com")
+                .getSingleResult();
+
+        System.out.println("\n/// USUARIO BUSCADO POR MAIL ///");
+        System.out.println(usuarioMail);
+
+        em.getTransaction().begin();
+
+        Producto productoEliminar = em.find(Producto.class, 10L);
+
+        if (productoEliminar != null) {
+            em.remove(productoEliminar);
+        }
+
+        em.getTransaction().commit();
+
+        em.getTransaction().commit();
+
         em.close();
         emf.close();
 
