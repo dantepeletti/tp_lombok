@@ -14,10 +14,14 @@ import programacion3.dtos.UsuarioDTO;
 import programacion3.enums.Estado;
 import programacion3.enums.FormaPago;
 import programacion3.enums.Rol;
+import programacion3.repository.CategoriaRepository;
+import programacion3.repository.ProductoRepository;
+import programacion3.util.JPAUtil;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Main {
@@ -400,7 +404,7 @@ public class Main {
         usuario2.addPedido(pedido3);
 
         EntityManagerFactory emf =
-                Persistence.createEntityManagerFactory("miUnidad");
+                JPAUtil.getEntityManagerFactory();
 
         EntityManager em = emf.createEntityManager();
 
@@ -466,10 +470,8 @@ public class Main {
 
         em.getTransaction().commit();
 
-        em.getTransaction().commit();
 
         em.close();
         emf.close();
-
     }
 }

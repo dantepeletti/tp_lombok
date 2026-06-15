@@ -8,6 +8,7 @@ import programacion3.entities.Base;
 import programacion3.util.JPAUtil;
 import java.util.Optional;
 import java.util.List;
+import java.util.Scanner;
 
 public abstract class BaseRepository<T extends Base> {
     protected EntityManagerFactory emf;
