@@ -1,6 +1,7 @@
 package programacion3;
 
 import programacion3.entities.Categoria;
+import programacion3.entities.Producto;
 import programacion3.repository.CategoriaRepository;
 import programacion3.repository.ProductoRepository;
 
@@ -25,6 +26,10 @@ public class MainParcial {
             System.out.println("7 - Baja Categoria");
             System.out.println("8 - Modificar Categoria");
             System.out.println("9 - Listar Categorias");
+            System.out.println("10 - Alta Producto");
+            System.out.println("11 - Baja Producto");
+            System.out.println("12 - Modificar Producto");
+            System.out.println("13 - Listar Productos");
             System.out.println("0 - Salir");
 
             opcion = sc.nextInt();
@@ -112,6 +117,144 @@ public class MainParcial {
                                     "ID: " + c.getId()
                                             + " | Nombre: " + c.getNombre()
                                             + " | Descripcion: " + c.getDescripcion()
+                            )
+                    );
+
+                    break;
+
+                case 10:
+
+                    System.out.println("\n=== CATEGORIAS DISPONIBLES ===");
+
+                    categoriaRepo.listarActivos().forEach(c ->
+                            System.out.println(
+                                    "ID: " + c.getId()
+                                            + " | Nombre: " + c.getNombre()
+                            )
+                    );
+
+                    System.out.print("Ingrese ID de la categoria: ");
+                    Long idCategoria = sc.nextLong();
+                    sc.nextLine();
+
+                    var categoriaProductOpt = categoriaRepo.buscarPorId(idCategoria);
+
+                    if (categoriaProductOpt.isEmpty()) {
+
+                        System.out.println("No existe una categoria con ese ID.");
+
+                    } else {
+
+                        Categoria categoriaSeleccionada = categoriaProductOpt.get();
+
+                        System.out.print("Nombre: ");
+                        String nombreProducto = sc.nextLine();
+
+                        System.out.print("Precio: ");
+                        Double precio = sc.nextDouble();
+                        sc.nextLine();
+
+                        System.out.print("Descripcion: ");
+                        String descripcionProducto = sc.nextLine();
+
+                        System.out.print("Stock: ");
+                        int stock = sc.nextInt();
+                        sc.nextLine();
+
+                        Producto producto = Producto.builder()
+                                .nombre(nombreProducto)
+                                .precio(precio)
+                                .descripcion(descripcionProducto)
+                                .stock(stock)
+                                .imagen("")
+                                .disponible(true)
+                                .categoria(categoriaSeleccionada)
+                                .eliminado(false)
+                                .createdAt(LocalDateTime.now())
+                                .build();
+
+                        producto = productoRepo.guardar(producto);
+
+                        System.out.println("Producto guardado correctamente.");
+                        System.out.println("ID generado: " + producto.getId());
+                    }
+
+                    break;
+
+                case 11:
+
+                    System.out.print("Ingrese ID del producto a eliminar: ");
+                    Long idEliminarProducto = sc.nextLong();
+                    sc.nextLine();
+
+                    var productoOpt = productoRepo.buscarPorId(idEliminarProducto);
+
+                    if (productoOpt.isEmpty()) {
+
+                        System.out.println("No existe un producto con ese ID.");
+
+                    } else if (productoOpt.get().isEliminado()) {
+
+                        System.out.println("El producto ya fue dado de baja.");
+
+                    } else {
+
+                        productoRepo.eliminarLogico(idEliminarProducto);
+
+                        System.out.println("Producto eliminado correctamente.");
+                    }
+
+                    break;
+
+                case 12:
+
+                    System.out.print("Ingrese ID del producto a modificar: ");
+                    Long idModificarProducto = sc.nextLong();
+                    sc.nextLine();
+
+                    var productoModificarOpt = productoRepo.buscarPorId(idModificarProducto);
+
+                    if (productoModificarOpt.isEmpty()) {
+
+                        System.out.println("No existe un producto con ese ID.");
+
+                    } else {
+
+                        Producto productoModificar = productoModificarOpt.get();
+
+                        System.out.println("\n=== DATOS ACTUALES ===");
+                        System.out.println("Nombre: " + productoModificar.getNombre());
+                        System.out.println("Precio: " + productoModificar.getPrecio());
+                        System.out.println("Stock: " + productoModificar.getStock());
+
+                        System.out.print("Nuevo nombre: ");
+                        productoModificar.setNombre(sc.nextLine());
+
+                        System.out.print("Nuevo precio: ");
+                        productoModificar.setPrecio(sc.nextDouble());
+
+                        System.out.print("Nuevo stock: ");
+                        productoModificar.setStock(sc.nextInt());
+                        sc.nextLine();
+
+                        productoRepo.guardar(productoModificar);
+
+                        System.out.println("Producto modificado correctamente.");
+                    }
+
+                    break;
+
+                case 13:
+
+                    System.out.println("\n=== PRODUCTOS ACTIVOS ===");
+
+                    productoRepo.listarActivos().forEach(p ->
+                            System.out.println(
+                                    "ID: " + p.getId()
+                                            + " | Nombre: " + p.getNombre()
+                                            + " | Precio: $" + p.getPrecio()
+                                            + " | Stock: " + p.getStock()
+                                            + " | Categoria: " + p.getCategoria().getNombre()
                             )
                     );
 
