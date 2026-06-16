@@ -7,6 +7,7 @@ import programacion3.repository.ProductoRepository;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
+import java.util.List;
 
 public class MainParcial {
 
@@ -30,6 +31,7 @@ public class MainParcial {
             System.out.println("11 - Baja Producto");
             System.out.println("12 - Modificar Producto");
             System.out.println("13 - Listar Productos");
+            System.out.println("14 - Productos por Categoria");
             System.out.println("0 - Salir");
 
             opcion = sc.nextInt();
@@ -257,6 +259,46 @@ public class MainParcial {
                                             + " | Categoria: " + p.getCategoria().getNombre()
                             )
                     );
+
+                    break;
+
+                case 14:
+
+                    System.out.println("\n=== CATEGORIAS DISPONIBLES ===");
+
+                    categoriaRepo.listarActivos().forEach(c ->
+                            System.out.println(
+                                    "ID: " + c.getId()
+                                            + " | Nombre: " + c.getNombre()
+                            )
+                    );
+
+                    System.out.print("Seleccione el ID de la categoria: ");
+                    Long idCategoriaReporte = sc.nextLong();
+                    sc.nextLine();
+
+                    List<Producto> productosCategoria =
+                            productoRepo.buscarPorCategoria(idCategoriaReporte);
+
+                    if (productosCategoria.isEmpty()) {
+
+                        System.out.println(
+                                "No hay productos asociados a esa categoria."
+                        );
+
+                    } else {
+
+                        System.out.println("\n=== PRODUCTOS ENCONTRADOS ===");
+
+                        productosCategoria.forEach(p ->
+                                System.out.println(
+                                        "ID: " + p.getId()
+                                                + " | Nombre: " + p.getNombre()
+                                                + " | Precio: $" + p.getPrecio()
+                                                + " | Stock: " + p.getStock()
+                                )
+                        );
+                    }
 
                     break;
 
